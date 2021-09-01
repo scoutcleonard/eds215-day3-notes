@@ -415,10 +415,17 @@ SELECT * FROM Site JOIN Visited;
 ```
 
 ```{sql connection=db}
+
+-- joining ON says: the only rows I care about are the ones where the name from the name from the site table = the name from the visited table 
+-- because we are joining multiple tables, there is the possibility of column names clashing 
+
 SELECT * FROM Site JOIN Visited ON Site.name = Visited.site;
 ```
 
 ```{sql connection=db}
+
+-- same join, but we include when and where each site was visited 
+
 SELECT Site.lat, Site.long, Visited.dated
 FROM   Site JOIN Visited
 ON     Site.name = Visited.site;
