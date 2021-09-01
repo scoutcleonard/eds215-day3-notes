@@ -21,10 +21,19 @@ db <- dbConnect(RSQLite::SQLite(), dbname = "survey.db")
 ## 1. [Selecting Data](https://swcarpentry.github.io/sql-novice-survey/01-select/index.html)
 
 ```{bash}
+
+#bash in the header means this code is sent to bash through Rmd, then runs the line, then closes bash. This means context doesn't carry over from one block to the next. This means you can't have the same bash script in multiple blocks! 
+
 echo '.tables' | sqlite3 survey.db
 ```
 ```{sql connection=db}
+-- set up to use the standard sql syntax (capitalize all the words, although sql is case insensitive)
+-- space is also not important
+-- operation is SELECT
+-- following elements defines variables of interest, where * means all the columns
 SELECT name AS tables FROM sqlite_master WHERE type = 'table'
+
+-- this is how you comment out sql
 ```
 
 ```{bash}
@@ -57,10 +66,15 @@ SELECT * FROM Person;
 ## 2. [Sorting and Removing Duplicates](https://swcarpentry.github.io/sql-novice-survey/02-sort-dup/index.html)
 
 ```{sql connection=db}
+
+-- gives every row, and for every row, we select out the column 
+
 SELECT quant FROM Survey;
 ```
 
 ```{sql connection=db}
+
+-- SELECT DISTINCT means only return rows that are unique
 SELECT DISTINCT quant FROM Survey;
 ```
 
@@ -69,6 +83,9 @@ SELECT DISTINCT taken, quant FROM Survey;
 ```
 
 ```{sql connection=db}
+
+-- selects everything from the Person table, then selects the results by id. 
+
 SELECT * FROM Person ORDER BY id;
 ```
 

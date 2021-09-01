@@ -17,6 +17,18 @@ To quit SQL, run `.q`.
 
 **NOTE:** an **alias** in Bash lets you shortcut a command as some personalized command! 
 
+- `--` comments out the code
+- verbose language! 
+- "structured query language": originally made for ordinary people to communicate with databases
+  - has since become a programming language, and lost this definition! 
+- always starts with a **VERB**
+  - then an **object**, want to want to apply the verb to 
+  - then what you're taking the data form
+  - then a logical expression 
+- *Philosophy* SQL is a symbolic language, whereas R is imperative. You can find things in databases, but you can't assign variables or tell databases to do specific things. 
 
-
-
+#### Databases
+- *Everything in a database is a table.* You can save items of interest in SQL as a database.
+- order of observations doesn't matter
+- order of columns/variables doesn't matter
+- "relational" databases refers to the fact that the observations are not related to each other, but grouped 
