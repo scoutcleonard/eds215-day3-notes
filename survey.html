@@ -771,7 +771,10 @@ SELECT * FROM Person ORDER BY id;</code></pre>
 </div>
 <div id="filtering" class="section level2">
 <h2>3. <a href="https://swcarpentry.github.io/sql-novice-survey/03-filter/index.html">Filtering</a></h2>
-<pre class="sql"><code>SELECT * FROM Visited WHERE site = &#39;DR-1&#39;;</code></pre>
+<pre class="sql"><code>
+--return rows that match some argument
+
+SELECT * FROM Visited WHERE site = &#39;DR-1&#39;;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption>3 records</caption>
@@ -823,7 +826,10 @@ SELECT * FROM Person ORDER BY id;</code></pre>
 </tbody>
 </table>
 </div>
-<pre class="sql"><code>SELECT * FROM Visited WHERE site = &#39;DR-1&#39; AND dated &lt; &#39;1930-01-01&#39;;</code></pre>
+<pre class="sql"><code>
+-- sql treats dates cavalierly. sql doesn&#39;t have a date &#39;type.&#39; 
+-- &lt; DATE gives you data from before the date
+SELECT * FROM Visited WHERE site = &#39;DR-1&#39; AND dated &lt; &#39;1930-01-01&#39;;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption>2 records</caption>
@@ -924,7 +930,90 @@ SELECT * FROM Person ORDER BY id;</code></pre>
 </tbody>
 </table>
 </div>
-<pre class="sql"><code>SELECT * FROM Survey WHERE person IN (&#39;lake&#39;, &#39;roe&#39;);</code></pre>
+<pre class="sql"><code>
+-- test for set membership. possible match to any of the items in &#39;&#39;, without having to write a full &#39;OR&#39; statement. 
+
+SELECT * FROM Survey WHERE person IN (&#39;lake&#39;, &#39;roe&#39;);</code></pre>
+<div class="knitsql-table">
+<table>
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th align="right">taken</th>
+<th align="left">person</th>
+<th align="left">quant</th>
+<th align="right">reading</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">734</td>
+<td align="left">lake</td>
+<td align="left">sal</td>
+<td align="right">0.05</td>
+</tr>
+<tr class="even">
+<td align="right">751</td>
+<td align="left">lake</td>
+<td align="left">sal</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="odd">
+<td align="right">752</td>
+<td align="left">lake</td>
+<td align="left">rad</td>
+<td align="right">2.19</td>
+</tr>
+<tr class="even">
+<td align="right">752</td>
+<td align="left">lake</td>
+<td align="left">sal</td>
+<td align="right">0.09</td>
+</tr>
+<tr class="odd">
+<td align="right">752</td>
+<td align="left">lake</td>
+<td align="left">temp</td>
+<td align="right">-16.00</td>
+</tr>
+<tr class="even">
+<td align="right">752</td>
+<td align="left">roe</td>
+<td align="left">sal</td>
+<td align="right">41.60</td>
+</tr>
+<tr class="odd">
+<td align="right">837</td>
+<td align="left">lake</td>
+<td align="left">rad</td>
+<td align="right">1.46</td>
+</tr>
+<tr class="even">
+<td align="right">837</td>
+<td align="left">lake</td>
+<td align="left">sal</td>
+<td align="right">0.21</td>
+</tr>
+<tr class="odd">
+<td align="right">837</td>
+<td align="left">roe</td>
+<td align="left">sal</td>
+<td align="right">22.50</td>
+</tr>
+<tr class="even">
+<td align="right">844</td>
+<td align="left">roe</td>
+<td align="left">rad</td>
+<td align="right">11.25</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="sql"><code>
+-- this is a longhand version of teh command above 
+
+SELECT * FROM Survey WHERE person = &#39;lake&#39; OR person = &#39;roe&#39;;
+</code></pre>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 10</caption>
@@ -1110,7 +1199,11 @@ SELECT * FROM Person ORDER BY id;</code></pre>
 </tbody>
 </table>
 </div>
-<pre class="sql"><code>SELECT * FROM Visited WHERE site LIKE &#39;DR%&#39;;</code></pre>
+<pre class="sql"><code>
+-- percent wildcard is analogous to the * wildcard for file expansion 
+-- the column site has to have a value that&#39;s &quot;like&quot; the expression &quot;DR%&quot;, aka starts with &quot;DR....&quot;
+
+SELECT * FROM Visited WHERE site LIKE &#39;DR%&#39;;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption>7 records</caption>
@@ -1160,7 +1253,8 @@ SELECT * FROM Person ORDER BY id;</code></pre>
 </tbody>
 </table>
 </div>
-<pre class="sql"><code>SELECT DISTINCT person, quant FROM Survey WHERE person = &#39;lake&#39; OR person = &#39;roe&#39;;</code></pre>
+<pre class="sql"><code>
+SELECT DISTINCT person, quant FROM Survey WHERE person = &#39;lake&#39; OR person = &#39;roe&#39;;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption>5 records</caption>

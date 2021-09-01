@@ -104,6 +104,9 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 ## 3. [Filtering](https://swcarpentry.github.io/sql-novice-survey/03-filter/index.html)
 
 ```{sql connection=db}
+
+--return rows that match some argument
+
 SELECT * FROM Visited WHERE site = 'DR-1';
 ```
 
@@ -112,6 +115,9 @@ SELECT id FROM Visited WHERE site = 'DR-1';
 ```
 
 ```{sql connection=db}
+
+-- sql treats dates cavalierly. sql doesn't have a date 'type.' 
+-- < DATE gives you data from before the date
 SELECT * FROM Visited WHERE site = 'DR-1' AND dated < '1930-01-01';
 ```
 
@@ -119,9 +125,21 @@ SELECT * FROM Visited WHERE site = 'DR-1' AND dated < '1930-01-01';
 SELECT * FROM Survey WHERE person = 'lake' OR person = 'roe';
 ```
 
-```{sql connection=db}
+```{sql connection=db} 
+
+-- test for set membership. possible match to any of the items in '', without having to write a full 'OR' statement. 
+
 SELECT * FROM Survey WHERE person IN ('lake', 'roe');
 ```
+
+```{sql connection=db}
+
+-- this is a longhand version of teh command above 
+
+SELECT * FROM Survey WHERE person = 'lake' OR person = 'roe';
+
+```
+
 
 ```{sql connection=db}
 SELECT * FROM Survey WHERE quant = 'sal' AND person = 'lake' OR person = 'roe';
@@ -132,10 +150,15 @@ SELECT * FROM Survey WHERE quant = 'sal' AND (person = 'lake' OR person = 'roe')
 ```
 
 ```{sql connection=db}
+
+-- percent wildcard is analogous to the * wildcard for file expansion 
+-- the column site has to have a value that's "like" the expression "DR%", aka starts with "DR...."
+
 SELECT * FROM Visited WHERE site LIKE 'DR%';
 ```
 
 ```{sql connection=db}
+
 SELECT DISTINCT person, quant FROM Survey WHERE person = 'lake' OR person = 'roe';
 ```
 
