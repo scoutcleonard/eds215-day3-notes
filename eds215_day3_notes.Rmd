@@ -1,0 +1,16 @@
+---
+title: "EDS 215 Day 3 Notes"
+author: "Scout Leonard"
+date: "9/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### SQL
+
+To run SQL in the command line, run `sqlite3`
+
+To quit SQL, run `.q`. 
