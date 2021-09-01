@@ -15,6 +15,8 @@ To run SQL in the command line, run `sqlite3`
 
 To quit SQL, run `.q`. 
 
+*SQL is a workflow. Rarely do you work with databases in the database.*
+
 **NOTE:** an **alias** in Bash lets you shortcut a command as some personalized command! 
 
 - `--` comments out the code
@@ -32,3 +34,21 @@ To quit SQL, run `.q`.
 - order of observations doesn't matter
 - order of columns/variables doesn't matter
 - "relational" databases refers to the fact that the observations are not related to each other, but grouped 
+- R doesn't know about what's going on inside databases. When you have a database, it's added to the whole database, but it won't show up in the environment, becuase R only knows about DB. Only SQL knows about the new tables you make. 
+- you can open and write into the database through the terminal and through R Studio using SQ Lite 3. 
+
+- **null**: it's legitimate to have an observation with an unknown value. It's treated as a "known unknown." It represents a *possible* value, where we don't know what it is. 
+
+#### Aggregations
+
+Aggregations for on a single column value and *sort out the nulls.* (for example, if taking the mean of 9 rows with one null value, the sum will be divided by 8, not 9, discounting the na value).
+
+- `count()` counts the number of rows returned. 
+- if you run `.mode box` you can return table data in actual tables!!
+- **Group By** 
+
+#### Combining Data
+
+- Joins match two tables based on matching values in columns. 
+
+

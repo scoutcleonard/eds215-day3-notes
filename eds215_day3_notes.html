@@ -175,6 +175,7 @@ pre code {
 <h3>SQL</h3>
 <p>To run SQL in the command line, run <code>sqlite3</code></p>
 <p>To quit SQL, run <code>.q</code>.</p>
+<p><em>SQL is a workflow. Rarely do you work with databases in the database.</em></p>
 <p><strong>NOTE:</strong> an <strong>alias</strong> in Bash lets you shortcut a command as some personalized command!</p>
 <ul>
 <li><code>--</code> comments out the code</li>
@@ -194,10 +195,22 @@ pre code {
 <div id="databases" class="section level4">
 <h4>Databases</h4>
 <ul>
-<li><em>Everything in a database is a table.</em> You can save items of interest in SQL as a database.</li>
-<li>order of observations doesn’t matter</li>
-<li>order of columns/variables doesn’t matter</li>
-<li>“relational” databases refers to the fact that the observations are not related to each other, but grouped</li>
+<li><p><em>Everything in a database is a table.</em> You can save items of interest in SQL as a database.</p></li>
+<li><p>order of observations doesn’t matter</p></li>
+<li><p>order of columns/variables doesn’t matter</p></li>
+<li><p>“relational” databases refers to the fact that the observations are not related to each other, but grouped</p></li>
+<li><p>R doesn’t know about what’s going on inside databases. When you have a database, it’s added to the whole database, but it won’t show up in the environment, becuase R only knows about DB. Only SQL knows about the new tables you make.</p></li>
+<li><p>you can open and write into the database through the terminal and through R Studio using SQ Lite 3.</p></li>
+<li><p><strong>null</strong>: it’s legitimate to have an observation with an unknown value. It’s treated as a “known unknown.” It represents a <em>possible</em> value, where we don’t know what it is.</p></li>
+</ul>
+</div>
+<div id="aggregations" class="section level4">
+<h4>Aggregations</h4>
+<p>Aggregations for on a single column value and <em>sort out the nulls.</em> (for example, if taking the mean of 9 rows with one null value, the sum will be divided by 8, not 9, discounting the na value).</p>
+<ul>
+<li><code>count()</code> counts the number of rows returned.</li>
+<li>if you run <code>.mode box</code> you can return table data in actual tables!!</li>
+<li><strong>Group By</strong></li>
 </ul>
 </div>
 </div>

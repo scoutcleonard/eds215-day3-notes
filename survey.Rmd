@@ -244,14 +244,22 @@ SELECT * FROM Scout;
 
 
 ```{sql connection=db}
+
+-- this fails because null is not a legal value, so you can't compare it. any test involving null can't be tested and has to be false! any logical test you do on null will fail. 
+
 SELECT * FROM Visited WHERE dated = NULL;
 ```
 
 ```{sql connection=db}
+
+-- 
 SELECT * FROM Visited WHERE dated != NULL;
 ```
 
 ```{sql connection=db}
+
+-- IS NULL is not a logical test, just a status test, so this works with null values! 
+
 SELECT * FROM Visited WHERE dated IS NULL;
 ```
 
@@ -282,7 +290,35 @@ SELECT avg(reading) FROM Survey WHERE quant = 'sal';
 ```
 
 ```{sql connection=db}
+
+-- count() counts the number of rows returned 
+
 SELECT count(reading) FROM Survey WHERE quant = 'sal';
+```
+```{sql connection=db}
+
+--if you ask for a non-aggregate value in addition to an aggregate, it will just throw in the last value run, which doesn't have anything to do with the calculated aggregate value is
+
+-- the query that should not be asked! 
+
+SELECT dated, count(site) FROM Visited;
+
+```
+
+```{sql connection=db}
+
+-- we get accurate results when we place aggregate values next to each other. the dated value it lower from an NA observation! 
+
+SELECT count(dated), count(site) FROM Visited;
+
+```
+
+```{sql connection=db}
+
+-- another example of adding aggregate and non aggregate values being Bad queries 
+
+SELECT count(dated), sum(dated), count(site), sum(site) FROM Visited;
+
 ```
 
 ```{sql connection=db}
@@ -310,6 +346,7 @@ SELECT min(dated) FROM Visited WHERE dated IS NOT NULL;
 ```
 
 ```{sql connection=db}
+
 SELECT person, count(reading), round(avg(reading), 2)
 FROM  Survey
 WHERE quant = 'rad';
@@ -323,6 +360,8 @@ AND   person = 'dyer';
 ```
 
 ```{sql connection=db}
+
+-- where clause takes tables and pulls out rows. group by breaks the database into piles and the select aggregates for each pile! 
 SELECT   person, count(reading), round(avg(reading), 2)
 FROM     Survey
 WHERE    quant = 'rad'
@@ -330,12 +369,22 @@ GROUP BY person;
 ```
 
 ```{sql connection=db}
+
+-- it is possible to group by null values, becuase they are distinct values in the table 
+
 SELECT   person, quant, count(reading), round(avg(reading), 2)
 FROM     Survey
 GROUP BY person, quant;
 ```
 
 ```{sql connection=db}
+
+-- table is survey
+-- pulling out the rows where person is not null
+-- of the rows left, we are grouping them by person and quantity
+--that gets returned to the selection process: aggregate over the reading values and give the count and average
+--order gives us the observations in alphabetical order by the variable called 
+
 SELECT   person, quant, count(reading), round(avg(reading), 2)
 FROM     Survey
 WHERE    person IS NOT NULL
@@ -344,10 +393,16 @@ ORDER BY person, quant;
 ```
 
 ```{sql connection=db}
+
+-- select statement gives us an average of the reading, and then we can use the result to use in other calculations, as demonstrated below
+
 SELECT reading - avg(reading) FROM Survey WHERE quant = 'rad';
 ```
 
 ```{sql connection=db}
+
+-- nested selects include other selects 
+
 SELECT reading - (SELECT avg(reading) FROM Survey WHERE quant = 'rad')
 FROM   Survey
 WHERE  quant = 'rad'
