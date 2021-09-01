@@ -165,20 +165,49 @@ SELECT DISTINCT person, quant FROM Survey WHERE person = 'lake' OR person = 'roe
 ## 4. [Calculating New Values](https://swcarpentry.github.io/sql-novice-survey/04-calc/index.html)
 
 ```{sql connection=db}
+
+-- select an arithmetic expression that involves a column
+--pulling out the rows where quantity is "rad" and multiplying the values by 1.05
+
 SELECT 1.05 * reading FROM Survey WHERE quant = 'rad';
 ```
+
+```{sql connection=db}
+
+-- 'AS' renames the column of the new table for us. same function as above, but we've manimulated the column name 
+
+SELECT 1.05 * reading AS adj_reading FROM Survey WHERE quant = 'rad';
+
+
+```
+
 
 ```{sql connection=db}
 SELECT taken, round(5 * (reading - 32) / 9, 2) FROM Survey WHERE quant = 'temp';
 ```
 
 ```{sql connection=db}
+
+-- with the recalculated column renamed "Celisius"
+
 SELECT taken, round(5 * (reading - 32) / 9, 2) as Celsius FROM Survey WHERE quant = 'temp';
 ```
 
 ```{sql connection=db}
+
+-- concatenate observations in 2 columns into a single column 
+
 SELECT personal || ' ' || family FROM Person;
 ```
+
+```{sql connection=db}
+
+--same command as above without the space!
+
+SELECT personal || "" || family FROM Person;
+
+```
+
 
 ```{sql connection=db}
 SELECT * FROM Person WHERE id = 'dyer' UNION SELECT * FROM Person WHERE id = 'roe';
@@ -195,12 +224,24 @@ SELECT * FROM Visited;
 ```
 
 ```{sql connection=db}
-SELECT * FROM Visited WHERE dated < '1930-01-01';
+
+-- "create" means "create some structure in the database 
+-- Views saves space for speed
+-- Creating a new table saves speed for space 
+
+CREATE VIEW Scout_query AS SELECT * FROM Visited WHERE dated < '1930-01-01';
 ```
 
 ```{sql connection=db}
 SELECT * FROM Visited WHERE dated >= '1930-01-01';
 ```
+
+```{sql connection=db}
+
+SELECT * FROM Scout;
+
+```
+
 
 ```{sql connection=db}
 SELECT * FROM Visited WHERE dated = NULL;
