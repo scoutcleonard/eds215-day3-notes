@@ -14,3 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 To run SQL in the command line, run `sqlite3`
 
 To quit SQL, run `.q`. 
+
+**NOTE:** an **alias** in Bash lets you shortcut a command as some personalized command! 
+
+
+
+
