@@ -432,6 +432,9 @@ ON     Site.name = Visited.site;
 ```
 
 ```{sql connection=db}
+
+-- looking at two columns and seeing if they're equal 
+
 SELECT Site.lat, Site.long, Visited.dated, Survey.quant, Survey.reading
 FROM   Site JOIN Visited JOIN Survey
 ON     Site.name = Visited.site
@@ -440,6 +443,9 @@ AND    Visited.dated IS NOT NULL;
 ```
 
 ```{sql connection=db}
+
+-- dataframes come with row ids that you get for free?? if you have duplicate rows and want to tell them apart, you need to make up a column attribute to distinguish them. 
+
 SELECT rowid, * FROM Person;
 ```
 

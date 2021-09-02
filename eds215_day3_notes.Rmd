@@ -28,6 +28,7 @@ To quit SQL, run `.q`.
   - then what you're taking the data form
   - then a logical expression 
 - *Philosophy* SQL is a symbolic language, whereas R is imperative. You can find things in databases, but you can't assign variables or tell databases to do specific things. 
+- case insensitive! 
 
 #### Databases
 - *Everything in a database is a table.* You can save items of interest in SQL as a database.
@@ -47,8 +48,63 @@ Aggregations for on a single column value and *sort out the nulls.* (for example
 - if you run `.mode box` you can return table data in actual tables!!
 - **Group By** 
 
+### Day 4 Notes
+
 #### Combining Data
 
-- Joins match two tables based on matching values in columns. 
+- **Joins** match two tables based on matching values in columns. 
+- Building a join is to combine data into tables you can ask questions of 
+  - If you want to ask questions of multiple tables, you have to join them to ask a question of them .
+  - subsets rows based on columns being equal 
+- "Views are a huge win because you can use them as a form of documentation." 
+
+#### Data Hygiene 
+
+- Databases can't function if we can't tell one row from another, so every row has an identifier. In SQL, it's a **Row ID**. This means that even if row's aren't unique, SQL can tell them apart. 
+  - They are sequentially assigned. 
+  - This Row ID is otherwise totally useless
+  - don't use it lol
+  - This identifier acts as a **primary key** for the row. 
+  - **Referential integrity** the integrity of keys is preserved
+    if you call a column a key, the integrity of the individual keys are preserved 
+    - Combining datasets based on a common variable is a way of setting foreign **key/primary key relationships** 
+    
+**Atomic values** can be subject to standard operators. Make sure the values in a row are each their own observation. 
+
+#### Creating and Modifying Data
+
+- `CREATE TABLE` : creates a new table. it's arguments are the names and types of the tables columns
+
+  - When you create a table, you can't create another table on top of it in the same name. You have to drop it first. 
+
+*Examples:*
+  - `CREATE TABLE Person(id text, personal test, family text);`
+    `CREATE TABLE Site (name text, lat real, long real);`
+    `CREATE TABLE Visited(id integer,site text,dated integer);`
+    
+    - `CREATE TABLE Survey(`
+      `taken   integer not null,` -- where reading taken
+      `person  text,`             -- may not know who took it
+      `quant   text not null,`    -- the quantity measured
+      `reading real not null,`    -- the actual reading
+      `primary key(taken, quant),`
+      ` foreign key(taken) references Visited(id),`
+      `foreign key(person) references Person(id)`
+      `);`
+      
+- `DROP TABLE` : gets rid of one of our tables. be careful using this! 
+- creating and dropping tables is easier in the command line 
+- **Data Types**
+  - *INTEGER*: a signed integer
+  - *REAL*: a floating point number
+  - *TEXT* : a character string
+  - *BLOB*: a "binary large object", such as an image  
+
+- `INSERT INTO table` adds observations to your table  
+*Example*: 
+
+  - `INSERT INTO Site (name, lat, long) VALUES ('DR-1', -49.85, -128.57);`
+    `INSERT INTO Site (name, lat, long) VALUES ('DR-3', -47.15, -126.72);`
+    `INSERT INTO Site (name, lat, long) VALUES ('MSK-4', -48.87, -123.40);`
 
 

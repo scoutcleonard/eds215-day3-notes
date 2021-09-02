@@ -191,6 +191,7 @@ pre code {
 <li>then a logical expression</li>
 </ul></li>
 <li><em>Philosophy</em> SQL is a symbolic language, whereas R is imperative. You can find things in databases, but you can’t assign variables or tell databases to do specific things.</li>
+<li>case insensitive!</li>
 </ul>
 <div id="databases" class="section level4">
 <h4>Databases</h4>
@@ -211,6 +212,74 @@ pre code {
 <li><code>count()</code> counts the number of rows returned.</li>
 <li>if you run <code>.mode box</code> you can return table data in actual tables!!</li>
 <li><strong>Group By</strong></li>
+</ul>
+</div>
+</div>
+<div id="day-4-notes" class="section level3">
+<h3>Day 4 Notes</h3>
+<div id="combining-data" class="section level4">
+<h4>Combining Data</h4>
+<ul>
+<li><strong>Joins</strong> match two tables based on matching values in columns.</li>
+<li>Building a join is to combine data into tables you can ask questions of
+<ul>
+<li>If you want to ask questions of multiple tables, you have to join them to ask a question of them .</li>
+<li>subsets rows based on columns being equal</li>
+</ul></li>
+<li>“Views are a huge win because you can use them as a form of documentation.”</li>
+</ul>
+</div>
+<div id="data-hygiene" class="section level4">
+<h4>Data Hygiene</h4>
+<ul>
+<li>Databases can’t function if we can’t tell one row from another, so every row has an identifier. In SQL, it’s a <strong>Row ID</strong>. This means that even if row’s aren’t unique, SQL can tell them apart.
+<ul>
+<li>They are sequentially assigned.</li>
+<li>This Row ID is otherwise totally useless</li>
+<li>don’t use it lol</li>
+<li>This identifier acts as a <strong>primary key</strong> for the row.</li>
+<li><strong>Referential integrity</strong> the integrity of keys is preserved if you call a column a key, the integrity of the individual keys are preserved
+<ul>
+<li>Combining datasets based on a common variable is a way of setting foreign <strong>key/primary key relationships</strong></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Atomic values</strong> can be subject to standard operators. Make sure the values in a row are each their own observation.</p>
+</div>
+<div id="creating-and-modifying-data" class="section level4">
+<h4>Creating and Modifying Data</h4>
+<ul>
+<li><p><code>CREATE TABLE</code> : creates a new table. it’s arguments are the names and types of the tables columns</p>
+<ul>
+<li>When you create a table, you can’t create another table on top of it in the same name. You have to drop it first.</li>
+</ul></li>
+</ul>
+<p><em>Examples:</em> - <code>CREATE TABLE Person(id text, personal test, family text);</code> <code>CREATE TABLE Site (name text, lat real, long real);</code> <code>CREATE TABLE Visited(id integer,site text,dated integer);</code></p>
+<pre><code>- `CREATE TABLE Survey(`
+  `taken   integer not null,` -- where reading taken
+  `person  text,`             -- may not know who took it
+  `quant   text not null,`    -- the quantity measured
+  `reading real not null,`    -- the actual reading
+  `primary key(taken, quant),`
+  ` foreign key(taken) references Visited(id),`
+  `foreign key(person) references Person(id)`
+  `);`
+  </code></pre>
+<ul>
+<li><p><code>DROP TABLE</code> : gets rid of one of our tables. be careful using this!</p></li>
+<li><p>creating and dropping tables is easier in the command line</p></li>
+<li><p><strong>Data Types</strong></p>
+<ul>
+<li><em>INTEGER</em>: a signed integer</li>
+<li><em>REAL</em>: a floating point number</li>
+<li><em>TEXT</em> : a character string</li>
+<li><em>BLOB</em>: a “binary large object”, such as an image</li>
+</ul></li>
+<li><p><code>INSERT INTO table</code> adds observations to your table<br />
+<em>Example</em>:</p>
+<ul>
+<li><code>INSERT INTO Site (name, lat, long) VALUES (&#39;DR-1&#39;, -49.85, -128.57);</code> <code>INSERT INTO Site (name, lat, long) VALUES (&#39;DR-3&#39;, -47.15, -126.72);</code> <code>INSERT INTO Site (name, lat, long) VALUES (&#39;MSK-4&#39;, -48.87, -123.40);</code></li>
+</ul></li>
 </ul>
 </div>
 </div>
