@@ -107,4 +107,15 @@ Aggregations for on a single column value and *sort out the nulls.* (for example
     `INSERT INTO Site (name, lat, long) VALUES ('DR-3', -47.15, -126.72);`
     `INSERT INTO Site (name, lat, long) VALUES ('MSK-4', -48.87, -123.40);`
 
+- Opposite of a **select statement** is a **remove statement**, which removes rows from your df. 
+*Examples*:
+
+  - `delete from foo where bar = 4;`
+    - `INSERT INTO foo (bar, baz) VALUES (4, 42);` adds the value back! 
+    - `SELECT * from foo;` lets you check! 
+  - `update foo set baz=500 where baz=100;` changes an observation
+    - `select * from foo;` allows you to check!
+    
+    
+If you have lots of manipulation you are doing to a database, put it in a file (like Text Editor!). 
 
